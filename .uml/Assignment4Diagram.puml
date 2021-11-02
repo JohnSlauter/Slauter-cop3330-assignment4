@@ -1,0 +1,107 @@
+@startuml
+
+class Launcher{
+    Methods
+    +void main(String args[])
+}
+
+class App{
+    Attributes
+    -String fxml_address
+    --
+    Methods
+    +void start(Stage primaryStage)
+}
+
+object Assignment4.FXML{
+    File Commands
+    +Open
+    +New
+    +Save
+    +Save As
+    +Save All
+    +Delete
+    --
+    Display Commands
+    +Display Incomplete Items
+    +Display Complete Items
+    +Display All Items
+}
+
+class ListController{
+    Attributes
+    -ArrayList<To_Do_List> lists
+    -int current_list_index
+    -TableColumn complete
+    -TableColumn description
+    -TableColumn due_date
+    --
+    Methods
+    +void initialize(URL location, ResourceBundle resources)
+    #ArrayList<To_Do_List> get_Lists()
+    #int get_Current_Index()
+    #TableColumn get_Complete_Column()
+    #TableColumn get_Description_Column()
+    #TableColumn get_Due_Date_Column()
+    --
+    @FXML Methods
+    +void load_list(ActionEvent e)
+    #void translate_list(ArrayList<File> files)
+    +void create_list(ActionEvent e)
+    +void open_list(ActionEvent e)
+    +void remove_list(ActionEvent e)
+    +void rename_list(ActionEvent e)
+    +void add_item(ActionEvent e)
+    +void remove_item(ActionEvent e)
+    +void edit_item(ActionEvent e)
+    +void update_item_completion(ActionEvent e)
+    +void display_complete_items(ActionEvent e)
+    +void display_incomplete_items(ActionEvent e)
+    +void save_as(ActionEvent e)
+    +void save(ActionEvent e)
+    +void save_all(ActionEvent e)
+}
+
+class To_Do_List{
+    Attributes
+    -String title
+    -ArrayList<Item> items
+    -String file_address
+    --
+    Methods
+    +String get_Title()
+    +ArrayList<Item> get_Items()
+    +String get_File_Address()
+    #void add_Item(Item i)
+    #void set_Title(String title)
+    #void set_File_Address(String file_address)
+    +String to_String()
+}
+
+class Item{
+    Attributes
+    -String description
+    -String due_date
+    -boolean is_complete
+    --
+    Methods
+    +String get_Description()
+    +String get_Due_Date()
+    +boolean is_Complete()
+    #void set_Description(String description)
+    #void set_Due_Date(String due_date)
+    #void set_Complete(boolean state)
+    +String to_String()
+}
+
+Launcher->App
+
+App->Assignment4.FXML
+
+Assignment4.FXML<->ListController
+
+To_Do_List->ListController
+
+Item->To_Do_List
+
+@enduml
